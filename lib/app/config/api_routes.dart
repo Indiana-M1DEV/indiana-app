@@ -1,1 +1,2 @@
-const exampleRoute = '/example';
+const authPrefix = '/auth';
+const accountPrefix = '/account';
