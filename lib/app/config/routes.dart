@@ -8,5 +8,5 @@ class AuthRoutes {
   static const String registerRoute = '/register';
 
   static const String forgotPasswordRoute = '/forgot-password';
-  static const String changePasswordRoute = ' /change-password';
+  static const String changePasswordRoute = '/change-password';
 }

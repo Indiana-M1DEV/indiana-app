@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:logging/logging.dart';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'package:Indiana/app/config/routes.dart';
 import 'package:Indiana/app/views/home_page.dart';
 import 'package:Indiana/app/utils/router.dart' as router;
@@ -10,7 +12,7 @@ import 'package:Indiana/app/config/config_file.dart' as config;
 import 'package:Indiana/app/themes/colors.dart' as app_colors;
 import 'package:Indiana/app/themes/fonts.dart' as app_fonts;
 
-void main() {
+Future<void> main() async {
   if (config.LogConfig.enableLogging) {
     Logger.root.level = Level
         .ALL; // Includes all severity levels (see at: https://pub.dev/packages/logging)
@@ -39,6 +41,7 @@ void main() {
 
   Logger logger = Logger('Indiana App');
   logger.info('Starting app...');
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
@@ -61,7 +64,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: config.appName,
-      home: HomePage(),
+      home: const HomePage(),
       onGenerateRoute: router.generateRoute,
       initialRoute: GenericRoutes.homeRoute,
     );
