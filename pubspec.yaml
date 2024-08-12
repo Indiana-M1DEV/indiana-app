@@ -44,6 +44,10 @@ dependencies:
   provider: ^6.0.5
   http: ^1.1.0
   ar_flutter_plugin: ^0.7.3
+  camera: ^0.10.5+9
+  path_provider: ^2.1.2
+  path: ^1.8.3
+  geolocator: ^9.0.0
 
 dev_dependencies:
   flutter_test:
@@ -71,10 +75,12 @@ flutter:
 
   assets:
     - lib/app/assets/images/
+    - assets/images/
     # - app/assets/icons/
     # - app/assets/svgs/
     # - app/assets/animations/
-    # - app/assets/fonts/
+    - lib/app/assets/fonts/
+    - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -87,8 +93,18 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   fonts:
+  fonts:
+    - family: Poppins
+      fonts: 
+        - asset: lib/app/assets/fonts/Poppins-Regular.ttf
+
+    - family: Poppins Black
+      fonts: 
+        - asset: lib/app/assets/fonts/Poppins-Black.ttf
+
+    - family: Poppins Bold
+      fonts: 
+        - asset: lib/app/assets/fonts/Poppins-Bold.ttf
   
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
