@@ -1,5 +1,6 @@
 class GenericRoutes {
   static const String homeRoute = '/';
+  static const String mapRoute = '/map';
 }
 
 class AuthRoutes {
@@ -8,5 +9,5 @@ class AuthRoutes {
   static const String registerRoute = '/register';
 
   static const String forgotPasswordRoute = '/forgot-password';
-  static const String changePasswordRoute = ' /change-password';
+  static const String changePasswordRoute = '/change-password';
 }

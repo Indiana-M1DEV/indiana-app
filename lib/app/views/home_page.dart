@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:Indiana/app/widgets/category_slider.dart';
 import 'package:Indiana/app/themes/fonts.dart' as app_fonts;
+
+import 'package:Indiana/app/config/routes.dart' as routes;
+
 import '../widgets/topnav.dart';
 import '../widgets/shared/navbar.dart';
 import '../widgets/cache_card.dart';
@@ -62,6 +65,11 @@ class HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () =>
+                    Navigator.pushNamed(context, routes.AuthRoutes.loginRoute),
+                child: Text('Go to Login Page'),
+              ),
             ],
           ),
         ),
@@ -70,7 +78,6 @@ class HomePageState extends State<HomePage> {
   }
 
   Future<void> _refreshData() async {
-    // Implement your refresh logic here
     await Future.delayed(Duration(seconds: 1)); // Mock delay
   }
 }

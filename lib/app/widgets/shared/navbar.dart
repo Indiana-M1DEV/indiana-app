@@ -1,24 +1,8 @@
 import 'package:flutter/material.dart';
 
-class BottomNavBar extends StatefulWidget {
-  final Function(int) onItemTapped;
+import 'package:Indiana/app/config/routes.dart' as routes;
 
-  BottomNavBar({required this.onItemTapped});
-
-  @override
-  _BottomNavBarState createState() => _BottomNavBarState();
-}
-
-class _BottomNavBarState extends State<BottomNavBar> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    widget.onItemTapped(index); // Call the callback method
-  }
-
+class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -26,7 +10,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
       elevation: 0,
       selectedItemColor: const Color.fromRGBO(23, 23, 25, 1),
       unselectedItemColor: const Color.fromRGBO(43, 44, 43, 1),
-      currentIndex: _selectedIndex,
       showSelectedLabels: false,
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
@@ -58,6 +41,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
           label: '',
         ),
       ],
+      onTap: (index) {
+        if (index == 0) {
+          Navigator.pushNamed(context, routes.GenericRoutes.mapRoute);
+        }
+      },
     );
   }
 }
