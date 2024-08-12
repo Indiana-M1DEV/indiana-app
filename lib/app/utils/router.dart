@@ -10,6 +10,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const HomePage());
     case AuthRoutes.loginRoute:
       return MaterialPageRoute(builder: (context) => LoginPage());
+    // case GenericRoutes.mapRoute:
+    //   return MaterialPageRoute(builder: (context) => const MapPage());
     default:
       return MaterialPageRoute(
           builder: (context) => Scaffold(

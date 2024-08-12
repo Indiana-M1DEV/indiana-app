@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:Indiana/app/config/routes.dart' as routes;
+
 class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,11 @@ class BottomNavBar extends StatelessWidget {
           label: '',
         ),
       ],
-      // Add callback functions to handle navigation if necessary
+      onTap: (index) {
+        if (index == 0) {
+          Navigator.pushNamed(context, routes.GenericRoutes.mapRoute);
+        }
+      },
     );
   }
 }
