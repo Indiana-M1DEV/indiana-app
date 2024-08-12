@@ -19,7 +19,6 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TopNav(),
       body: RefreshIndicator(
         onRefresh: _refreshData,
         child: Container(
@@ -75,7 +74,6 @@ class HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavBar(),
     );
   }
 
