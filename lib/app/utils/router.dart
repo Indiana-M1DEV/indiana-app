@@ -1,3 +1,5 @@
+import 'package:Indiana/app/views/map_page.dart';
+import 'package:Indiana/app/views/register_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:Indiana/app/config/routes.dart';
@@ -10,8 +12,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const HomePage());
     case AuthRoutes.loginRoute:
       return MaterialPageRoute(builder: (context) => LoginPage());
-    // case GenericRoutes.mapRoute:
-    //   return MaterialPageRoute(builder: (context) => const MapPage());
+    case AuthRoutes.registerRoute:
+      return MaterialPageRoute(builder: (context) => RegisterPage());
+    case GenericRoutes.mapRoute:
+      return MaterialPageRoute(builder: (context) => MapPage());
     default:
       return MaterialPageRoute(
           builder: (context) => Scaffold(

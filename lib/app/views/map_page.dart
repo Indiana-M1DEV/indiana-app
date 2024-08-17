@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:Indiana/app/widgets/shared/navbar.dart';
+import 'package:Indiana/app/widgets/shared/topnav.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
@@ -35,6 +36,7 @@ class _MapPageState extends State<MapPage> {
     List<LatLng> points = generateRandomPoints(10);
 
     return Scaffold(
+      appBar: TopNav(),
       body: FlutterMap(
         options: const MapOptions(
           initialCenter: LatLng(46.526068030015765, 2.4714261461279303),
@@ -68,11 +70,7 @@ class _MapPageState extends State<MapPage> {
           )
         ],
       ),
-      bottomNavigationBar: BottomNavBar(
-        onItemTapped: (int index) {
-          print('Item $index tapped');
-        },
-      ),
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 

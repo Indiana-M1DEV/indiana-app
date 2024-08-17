@@ -1,5 +1,5 @@
 class GenericRoutes {
-  static const String homeRoute = '/';
+  static const String homeRoute = '/home';
   static const String mapRoute = '/map';
 }
 

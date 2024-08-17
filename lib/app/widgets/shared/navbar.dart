@@ -22,7 +22,7 @@ class BottomNavBar extends StatelessWidget {
         BottomNavigationBarItem(
           icon: Padding(
             padding: const EdgeInsets.only(top: 20),
-            child: Icon(Icons.visibility),
+            child: Icon(Icons.house),
           ),
           label: '',
         ),
@@ -43,7 +43,11 @@ class BottomNavBar extends StatelessWidget {
       ],
       onTap: (index) {
         if (index == 0) {
-          Navigator.pushNamed(context, routes.GenericRoutes.mapRoute);
+          Navigator.pushReplacementNamed(
+              context, routes.GenericRoutes.mapRoute);
+        } else if (index == 1) {
+          Navigator.pushReplacementNamed(
+              context, routes.GenericRoutes.homeRoute);
         }
       },
     );

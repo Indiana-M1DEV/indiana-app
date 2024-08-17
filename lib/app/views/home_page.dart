@@ -4,7 +4,7 @@ import 'package:Indiana/app/themes/fonts.dart' as app_fonts;
 
 import 'package:Indiana/app/config/routes.dart' as routes;
 
-import '../widgets/topnav.dart';
+import '../widgets/shared/topnav.dart';
 import '../widgets/shared/navbar.dart';
 import '../widgets/cache_card.dart';
 
@@ -19,6 +19,7 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: TopNav(),
       body: RefreshIndicator(
         onRefresh: _refreshData,
         child: Container(
@@ -74,6 +75,7 @@ class HomePageState extends State<HomePage> {
           ),
         ),
       ),
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 

@@ -6,20 +6,22 @@ import 'package:Indiana/app/config/api_routes.dart' as api_routes;
 import 'package:Indiana/app/config/config_file.dart' as config;
 import 'package:Indiana/app/config/routes.dart' as routes;
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   bool _isLoading = false;
 
-  Future<void> _login() async {
+  Future<void> _register() async {
     if (!_formKey.currentState!.validate()) {
-      print('Form validation failed');
       return;
     }
 
@@ -27,14 +29,14 @@ class _LoginPageState extends State<LoginPage> {
       _isLoading = true;
     });
 
-    print('Sending login request...');
     final response = await http.post(
-      Uri.parse('${config.ApiConfig.apiUrl}${api_routes.authPrefix}/login'),
+      Uri.parse('${config.ApiConfig.apiUrl}${api_routes.authPrefix}/register'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, String>{
-        'email': _usernameController.text,
+        'username': _usernameController.text,
+        'email': _emailController.text,
         'password': _passwordController.text,
       }),
     );
@@ -43,21 +45,14 @@ class _LoginPageState extends State<LoginPage> {
       _isLoading = false;
     });
 
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
-
     if (response.statusCode == 200) {
-      print('Login successful, redirecting...');
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushReplacementNamed(context, routes.GenericRoutes.homeRoute);
-      });
+      Navigator.pushReplacementNamed(context, '/login');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Successfully logged in!')),
+        SnackBar(content: Text('Successfully registered! Please login.')),
       );
     } else {
-      print('Login failed');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to login: ${response.body}')),
+        SnackBar(content: Text('Failed to register: ${response.body}')),
       );
     }
   }
@@ -65,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Login')),
+      appBar: AppBar(title: Text('Register')),
       body: Center(
         child: _isLoading
             ? CircularProgressIndicator()
@@ -79,6 +74,17 @@ class _LoginPageState extends State<LoginPage> {
                       children: <Widget>[
                         TextFormField(
                           controller: _usernameController,
+                          decoration: InputDecoration(labelText: 'Username'),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your username';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 16),
+                        TextFormField(
+                          controller: _emailController,
                           decoration: InputDecoration(labelText: 'Email'),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -99,18 +105,33 @@ class _LoginPageState extends State<LoginPage> {
                             return null;
                           },
                         ),
+                        SizedBox(height: 16),
+                        TextFormField(
+                          controller: _confirmPasswordController,
+                          decoration:
+                              InputDecoration(labelText: 'Confirm Password'),
+                          obscureText: true,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please confirm your password';
+                            }
+                            if (value != _passwordController.text) {
+                              return 'Passwords do not match';
+                            }
+                            return null;
+                          },
+                        ),
                         SizedBox(height: 20),
                         ElevatedButton(
-                          onPressed: _login,
-                          child: Text('Login'),
+                          onPressed: _register,
+                          child: Text('Register'),
                         ),
-                        SizedBox(height: 16),
                         TextButton(
                           onPressed: () {
                             Navigator.pushNamed(
-                                context, routes.AuthRoutes.registerRoute);
+                                context, routes.AuthRoutes.loginRoute);
                           },
-                          child: Text("Don't have an account? Register here"),
+                          child: Text("Already have an account? Login here"),
                         ),
                       ],
                     ),
